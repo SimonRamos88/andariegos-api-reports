@@ -1,11 +1,10 @@
-from marshmallow import Schema, fields, ValidationError
+from marshmallow import Schema, fields, ValidationError, validate
 
 class ReportSchema(Schema):
-    id_report = fields.Str(required=True)
-    id_tour = fields.Int(required=True)
+    _id = fields.Str()
     id_events = fields.List(fields.Int(), required=True)
     id_reporter = fields.Str(required=True)
-    id_reported_users = fields.List(fields.Str(), required=True)
+    state = fields.Str(required=True, validate=validate.OneOf(['accepted', 'denied', 'pending']))
     description = fields.Str()
 
     class Meta:

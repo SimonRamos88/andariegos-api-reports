@@ -45,3 +45,11 @@ def delete_report(report_id):
     if result.deleted_count == 0:
         return jsonify({'error': 'Report not found'}), 404
     return jsonify({'message': 'Report deleted'}), 200
+
+
+@report_bp.route('/state/<string:state>', methods=['GET'])
+def get_reports_by_state(state):
+    if state not in ['accepted', 'denied', 'pending']:
+        return jsonify({'error': 'Invalid state'}), 400
+    reports = current_app.report_service.get_reports_by_state(state)
+    return jsonify(reports), 200
