@@ -24,3 +24,6 @@ class ReportRepository:
     
     def get_reports_by_state(self, state):
         return list(self.collection.find({'state': state}))
+    
+    def delete_reports_by_event_id(self, event_id):
+        return self.collection.delete_many({'id_event': event_id})

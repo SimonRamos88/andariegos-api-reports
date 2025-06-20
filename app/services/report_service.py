@@ -29,3 +29,6 @@ class ReportService:
     def get_reports_by_state(self, state):
         reports = self.repository.get_reports_by_state(state)
         return [serialize_report(report) for report in reports]
+    
+    def delete_report_by_id_event(self, event_id):
+        return self.repository.delete_reports_by_event_id(event_id)
